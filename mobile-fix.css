@@ -26,6 +26,9 @@
 
   /* grid·flex 자식이 내용 때문에 넘치지 않게 */
   .flex > *, [class*="flex "] > *, [class*="grid"] > *, .grid > * { min-width: 0 !important; }
+
+  /* 가로 스크롤 행(탭·칩)의 자식은 줄이지 않고 자연폭 유지 → 스크롤로 처리 */
+  [class*="overflow-x-auto"] > *, [class*="overflow-auto"] > * { flex-shrink: 0 !important; min-width: auto !important; }
   [class*="min-w-["] { min-width: 0 !important; }
 
   /* 고정폭 요소 해제 */
@@ -50,6 +53,9 @@
   /* 제목+버튼 행은 모바일에서 줄바꿈 허용 (버튼이 찌그러지지 않게) */
   main [class*="justify-between"], section [class*="justify-between"],
   [class*="lg:col-span"] [class*="justify-between"] { flex-wrap: wrap; row-gap: 8px; }
+
+  /* 좁아진 가운데정렬 행(브레드크럼 등)도 줄바꿈 허용 — 버튼·링크·고정헤더 제외 */
+  main [class*="items-center"]:not(button):not(a):not(header) { flex-wrap: wrap; }
 
   img { max-width: 100%; height: auto; }
 
