@@ -1,0 +1,67 @@
+/* mobile-fix.css — 프로토타입 갤러리 모바일 대응 (≤860px) */
+@media (max-width: 860px) {
+  html, body { overflow-x: hidden; }
+
+  /* 260px 사이드바 숨김 → 콘텐츠 전폭 */
+  aside[class*="fixed"] { display: none !important; }
+  .pl-\[260px\] { padding-left: 0 !important; }
+  header[class*="fixed"], [class*="left-\[260px\]"] { left: 0 !important; }
+
+  /* 거터·여백 축소 */
+  [class*="px-gutter-desktop"] { padding-left: 16px !important; padding-right: 16px !important; }
+  [class*="py-gutter-desktop"] { padding-top: 16px !important; padding-bottom: 16px !important; }
+  [class*="gap-gutter-desktop"] { gap: 12px !important; }
+  [class*="p-gutter-desktop"] { padding: 16px !important; }
+  [class*="space-lg"], [class*="space-xl"] { padding: 14px !important; }
+  [class*="py-space-lg"] { padding-top: 14px !important; padding-bottom: 14px !important; }
+  [class*="px-space-lg"], [class*="px-space-xl"] { padding-left: 14px !important; padding-right: 14px !important; }
+  [class*="gap-space-lg"], [class*="gap-space-xl"] { gap: 12px !important; }
+
+  /* 다단 그리드 → 1열 (칸반처럼 flex+scroll 쓰는 곳은 영향 없음) */
+  [class*="grid-cols-"] { grid-template-columns: 1fr !important; }
+
+  /* flex 자식이 내용 때문에 넘치지 않게 */
+  .flex > *, [class*="flex "] > * { min-width: 0; }
+  [class*="min-w-["] { min-width: 0 !important; }
+
+  /* 고정폭 요소 해제 */
+  [class*="w-[320px]"], [class*="w-[300px]"], [class*="w-[280px]"],
+  [class*="w-[260px]"]:not(aside), [class*="max-w-[320px]"],
+  [class*="max-w-[360px]"], [class*="max-w-[400px]"] { width: 100% !important; max-width: 100% !important; }
+
+  /* 큰 제목 축소 */
+  h1 { font-size: clamp(20px, 5.6vw, 28px) !important; }
+  h2 { font-size: clamp(16px, 4.6vw, 21px) !important; }
+  [class*="text-[24px]"], [class*="text-[28px]"], [class*="text-[32px]"],
+  [class*="text-[36px]"], [class*="text-[40px]"], [class*="text-[48px]"] {
+    font-size: clamp(20px, 5.6vw, 28px) !important;
+    line-height: 1.25 !important;
+  }
+
+  /* 표·넓은 블록 가로 스크롤 */
+  table { display: block; overflow-x: auto; max-width: 100%; }
+  [class*="whitespace-nowrap"] { white-space: normal; }
+
+  img { max-width: 100%; height: auto; }
+
+  /* fixed 하단 CTA/바는 전폭 */
+  [class*="fixed"][class*="bottom-0"] { left: 0 !important; right: 0 !important; }
+
+  /* 상단바 압축 — 검색창 숨김, 버튼 축소 */
+  header div.relative.flex, header div.relative { display: none !important; }
+  header { gap: 8px !important; }
+  header > div { gap: 8px !important; }
+  header button { padding-left: 8px !important; padding-right: 8px !important; font-size: 11.5px !important; gap: 4px !important; white-space: nowrap; }
+  header img[class*="h-8"] { height: 24px !important; }
+
+  /* 터치 타깃 최소 높이 */
+  button, a[class*="rounded"], a[class*="px-"] { min-height: 38px; }
+}
+
+/* 작은 폰에서도 카드 내부 패딩 과다 방지 */
+@media (max-width: 480px) {
+  [class*="p-5"], [class*="p-6"], [class*="p-7"], [class*="p-8"] { padding: 14px !important; }
+  [class*="px-5"], [class*="px-6"], [class*="px-7"], [class*="px-8"] { padding-left: 14px !important; padding-right: 14px !important; }
+  [class*="py-5"], [class*="py-6"], [class*="py-7"], [class*="py-8"] { padding-top: 14px !important; padding-bottom: 14px !important; }
+  [class*="text-[20px]"], [class*="text-[22px]"] { font-size: 17px !important; }
+}
