@@ -20,8 +20,12 @@
   /* 다단 그리드 → 1열 (칸반처럼 flex+scroll 쓰는 곳은 영향 없음) */
   [class*="grid-cols-"] { grid-template-columns: 1fr !important; }
 
-  /* flex 자식이 내용 때문에 넘치지 않게 */
-  .flex > *, [class*="flex "] > * { min-width: 0; }
+  /* 달력 등 7열 그리드는 형태 유지 → 카드 내부 가로 스크롤 */
+  [class*="grid-cols-7"] { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; min-width: 620px; }
+  div:has(> [class*="grid-cols-7"]) { overflow-x: auto; }
+
+  /* grid·flex 자식이 내용 때문에 넘치지 않게 */
+  .flex > *, [class*="flex "] > *, [class*="grid"] > *, .grid > * { min-width: 0 !important; }
   [class*="min-w-["] { min-width: 0 !important; }
 
   /* 고정폭 요소 해제 */
@@ -41,6 +45,11 @@
   /* 표·넓은 블록 가로 스크롤 */
   table { display: block; overflow-x: auto; max-width: 100%; }
   [class*="whitespace-nowrap"] { white-space: normal; }
+  button { white-space: nowrap; }
+
+  /* 제목+버튼 행은 모바일에서 줄바꿈 허용 (버튼이 찌그러지지 않게) */
+  main [class*="justify-between"], section [class*="justify-between"],
+  [class*="lg:col-span"] [class*="justify-between"] { flex-wrap: wrap; row-gap: 8px; }
 
   img { max-width: 100%; height: auto; }
 
