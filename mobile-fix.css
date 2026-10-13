@@ -20,9 +20,13 @@
   /* 다단 그리드 → 1열 (칸반처럼 flex+scroll 쓰는 곳은 영향 없음) */
   [class*="grid-cols-"] { grid-template-columns: 1fr !important; }
 
-  /* 달력 등 7열 그리드는 형태 유지 → 카드 내부 가로 스크롤 */
-  [class*="grid-cols-7"] { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; min-width: 620px; }
-  div:has(> [class*="grid-cols-7"]) { overflow-x: auto; }
+  /* 고정 헤더(64px) 아래로 본문 시작 — 위의 py 규칙이 pt-16을 덮어쓰지 않도록 복원 */
+  main[class*="pt-16"] { padding-top: 80px !important; }
+
+  /* 달력 등 7열 그리드는 한 화면에 7열 모두 표시 (셀·라벨 축소) */
+  [class*="grid-cols-7"] { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; }
+  [class*="grid-cols-7"] > div { min-height: 64px !important; padding: 4px 2px !important; overflow: hidden; }
+  [class*="grid-cols-7"] [class*="text-[9.5px]"] { font-size: 9px !important; padding-left: 2px !important; padding-right: 2px !important; }
 
   /* grid·flex 자식이 내용 때문에 넘치지 않게 */
   .flex > *, [class*="flex "] > *, [class*="grid"] > *, .grid > * { min-width: 0 !important; }
